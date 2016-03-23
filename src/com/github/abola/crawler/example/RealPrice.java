@@ -10,7 +10,7 @@ public class RealPrice {
 		//
 		System.out.println( 
 			CrawlerPack.start()
-				.setRemoteEncoding("big5")
+//				.setRemoteEncoding("big5")
 				.getFromXml(uri)
 //				.select("td:matchesOwn(^[\\+\\-]?([0-9]{1,3},)*[0-9]{1,3}(\\.[0-9]+)*$)")
 				.toString()

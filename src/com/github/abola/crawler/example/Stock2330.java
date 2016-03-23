@@ -16,8 +16,9 @@ public class Stock2330 {
 			CrawlerPack.start()
 				.setRemoteEncoding("big5")
 				.getFromHtml(uri)
-				.select("td:matchesOwn(^[\\+\\-]?([0-9]{1,3},)*[0-9]{1,3}(\\.[0-9]+)*$)")
-				.toString()
+//				.select("td:matchesOwn(^[\\+\\-]?([0-9]{1,3},)*[0-9]{1,3}(\\.[0-9]+)*$)")
+				.select("script")
+//				.toString()
 		);
 		
 		
