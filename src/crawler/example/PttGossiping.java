@@ -1,4 +1,4 @@
-package com.github.abola.crawler.example;
+package crawler.example;
 
 import java.util.ArrayList;
 import java.util.Arrays;

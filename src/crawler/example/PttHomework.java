@@ -1,4 +1,4 @@
-package com.github.abola.crawler.example;
+package crawler.example;
 
 import com.github.abola.crawler.CrawlerPack;
 
