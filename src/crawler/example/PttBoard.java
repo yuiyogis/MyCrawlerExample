@@ -13,31 +13,42 @@ import com.github.abola.crawler.CrawlerPack;
 
 /**
  * 範例: 使用爬蟲包取得八卦版最後50篇文章的網址
+ * 
+ * 重點
+ * 1. cookie 如何設定
+ * 2. 如何從文章特性中提取資料
+ * 3. 分頁資料練習
+ * 4. 簡易將資料量化，做簡易的資料探索
  */
-class PttGossiping {
+class PttBoard {
 
-    final static String gossipMainPage = "https://www.ptt.cc/bbs/Gossiping/index.html";
-    final static String gossipIndexPage = "https://www.ptt.cc/bbs/Gossiping/index%s.html";
-    // 取得最後幾篇的文章數量
-    static Integer loadLastPosts = 50;
+	final static String board = "Gossiping";
+    final static String pttMainPage = "https://www.ptt.cc/bbs/"+board+"/index.html";
+    final static String pttIndexPage = "https://www.ptt.cc/bbs/"+board+"/index%s.html";
+    
+    // 取得最後幾篇的文章數量(bug?)
+    static Integer loadLastPosts = 20;
 
     public static void main(String[] argv){
 
+    	// 取得前一頁的index
         String prevPage =
             CrawlerPack.start()
                 .addCookie("over18","1")                // 八卦版進入需要設定cookie
-                .getFromHtml(gossipMainPage)            // 遠端資料格式為 HTML
+                .getFromHtml(pttMainPage)            // 遠端資料格式為 HTML
                 .select(".action-bar .pull-right > a")  // 取得右上角『前一頁』的內容
                 .get(1).attr("href")
-                .replaceAll("/bbs/Gossiping/index([0-9]+).html", "$1");
+                .replaceAll("/bbs/"+board+"/index([0-9]+).html", "$1");
+        
+        
         
         // 目前最末頁 index 編號
-        Integer lastPage = Integer.valueOf(prevPage)+1;
+        Integer lastPage = Integer.valueOf(prevPage);
 
         List<String> lastPostsLink = new ArrayList<String>();
 
         while ( loadLastPosts > lastPostsLink.size() ){
-            String currPage = String.format(gossipIndexPage, lastPage--);
+            String currPage = String.format(pttIndexPage, lastPage--);
 
             Elements links =
                 CrawlerPack.start()
@@ -48,9 +59,14 @@ class PttGossiping {
             for( Element link: links) lastPostsLink.add( link.attr("href") );
         }
 
+        System.out.println("作者,標題,推總數,不重複推,噓總數,不重複噓,總參與人數");
+        
         // 個別分頁每一頁資訊
         for(String url : lastPostsLink){
+        
         	System.out.println( analyzeFeed(url) );
+
+        	// 重要：為什麼要有這一行？
         	try{Thread.sleep(150);}catch(Exception e){}
         }
     }
@@ -69,7 +85,6 @@ class PttGossiping {
 		        .addCookie("over18","1")                // 八卦版進入需要設定cookie
 		        .getFromHtml("https://www.ptt.cc"+url);           // 遠端資料格式為 HTML
         
-//        System.out.println(feed);
         
         // 1. 文章作者
         String feedAuthor = feed.select("span:contains(作者) + span").text();
@@ -105,7 +120,6 @@ class PttGossiping {
         				+ feedUnLikeCount +","
         				+ feedUnLikeCountNoRep +","
         				+ feedReplyCountNoRep;
-//        System.out.println(output);
     	return output;
     }
     

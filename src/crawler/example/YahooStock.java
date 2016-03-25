@@ -18,7 +18,16 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 /**
- * 每次呼叫都去爬指定個股，目前畫面上的交易明細資料
+ * 整合練習：Yahoo Stock 個股成交明細
+ * 
+ * 目標取回 Yahoo Stock指定個股的交易明細資料
+ * 但網頁只會保留最後50筆交易明細，所以必需排程
+ * 在交易日的 AM 09:00 - PM 13:25不斷擷取
+ * 並在14:45再補上最後盤後交易記錄
+ * 
+ * 重點
+ * 1. 自動排程
+ * 2. 復習 mongodb
  * 
  * @author Abola Lee
  *
@@ -26,8 +35,8 @@ import com.mongodb.MongoClient;
 public class YahooStock {
 
 	static Logger log = LoggerFactory.getLogger(YahooStock.class);
-	final static String mongodbServer = "128.199.204.20";
-	final static String mongodbDB = "mydb";
+	final static String mongodbServer = "128.199.204.20"; // your host name
+	final static String mongodbDB = "stock";
 	
 	static String stockNumber;
 	
@@ -41,12 +50,21 @@ public class YahooStock {
 			stockNumber = args[0];
 		}else{
 			// 沒輸入參數
-			return ;
+			log.error("未輸入股號");
+			
+			// 技巧：NullPointerException 才能正確中止 Jenkins 的 job
+			String forkException=null; 
+			forkException.toString();
 		}
 		
 		crawlerStockByNumber(stockNumber);
 	}
 	
+	
+	/**
+	 * 依輸入的股號取得資料
+	 * @param stockNumber
+	 */
 	static void crawlerStockByNumber(String stockNumber){
 
 		// 遠端資料路徑
@@ -59,21 +77,29 @@ public class YahooStock {
 			CrawlerPack.start()
 				.setRemoteEncoding("big5")// 設定遠端資料文件編碼
 				.getFromHtml(uri)
-				// 目標 <td align="center" width="240">2330 台積電 成 交 明 細</td>
+				// 目標含有  成 交 明 細  的table
+				// <td align="center" width="240">2330 台積電 成 交 明 細</td>
 				.select("table:contains(成 交 明 細) ") ;
-		
-//		log.debug( transDetail.toString() );
-		
+
+		// 分解明細資料表格
 		List<DBObject> parsedTransDetail = parseTransDetail(transDetail);
 		
+		// 儲存明細
 		saveTransDetail(parsedTransDetail);
 	}
 	
+	/**
+	 * 將明細資料表格，分解成 Mongodb物件的集合 
+	 * 
+	 * @param transDetail
+	 * @return
+	 */
 	static List<DBObject> parseTransDetail(Elements transDetail){
 
 		List<DBObject> result = new ArrayList<>();
 		
-		
+		// 將以下分解出資料日期中的 105/03/25
+		// <td width="180">資料日期：105/03/25</td>
 		String day = transDetail
 						.select("td:matchesOwn(資料日期)")
 						.text().substring(5,14);
@@ -83,7 +109,6 @@ public class YahooStock {
 			
 			Map<String, String> data = new HashMap<>();
 			
-//			log.debug( detail.toString() );
 /*			資料格式範例
   			<tr align="center" bgcolor="#ffffff" height="25">
 			 <td>09:45:46</td>
@@ -94,9 +119,9 @@ public class YahooStock {
 			 <td>1</td>
 			</tr>
 */			
-//			log.debug( detail.select("td:eq(0)").text() );
 			data.put("stock", stockNumber);
 			data.put("day", day);
+			
 			data.put("time", detail.select("td:eq(0)").text());
 			data.put("buy", detail.select("td:eq(1)").text());
 			data.put("sell", detail.select("td:eq(2)").text());
@@ -108,6 +133,11 @@ public class YahooStock {
 		return result;
 	} 
 	
+	/**
+	 * 將分解完的明細資料全部存回mongodb
+	 * 
+	 * @param parsedTransDetail
+	 */
 	static void saveTransDetail(List<DBObject> parsedTransDetail){
 
 		MongoClient mongoClient ;
