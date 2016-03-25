@@ -30,7 +30,7 @@
           <configuration>
             <programs>
               <program>
-                <mainClass>crawler.example</mainClass>
+                <mainClass>crawler.example.YahooStock</mainClass>
                 <id>yahooStock</id>
               </program>
             </programs>
