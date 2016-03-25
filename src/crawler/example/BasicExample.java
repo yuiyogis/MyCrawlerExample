@@ -2,6 +2,12 @@ package crawler.example;
 
 import com.github.abola.crawler.CrawlerPack;
 
+/**
+ * 爬蟲包程式的全貌，就只有這固定的模式
+ * 
+ * @author Abola Lee
+ *
+ */
 public class BasicExample {
 	
 	public static void main(String[] args) {

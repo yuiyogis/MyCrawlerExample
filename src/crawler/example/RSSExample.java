@@ -2,6 +2,14 @@ package crawler.example;
 
 import com.github.abola.crawler.CrawlerPack;
 
+/**
+ * RSS也是XML格式的一種類型
+ * 
+ * 練習取得蘋果新聞提供的RSS
+ * 
+ * @author Abola Lee
+ *
+ */
 public class RSSExample {
 	public static void main(String[] args) {
 		
@@ -10,19 +18,8 @@ public class RSSExample {
 
 		System.out.println(
 				CrawlerPack.start()
-				
-				// 參數設定
-			    //.addCookie("key","value")	// 設定cookie
-				//.setRemoteEncoding("big5")// 設定遠端資料文件編碼
-				
-				// 選擇資料格式 (三選一)
-//				.getFromJson(uri)
-			    //.getFromHtml(uri)
-			    .getFromXml(uri)
-			    
-			    // 這兒開始是 Jsoup Document 物件操作
-			    .select("item title")
-			    
+				    .getFromXml(uri)
+				    .select("item title")
 		);
 	}
 }

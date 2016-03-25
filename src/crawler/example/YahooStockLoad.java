@@ -11,12 +11,20 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
+
+/**
+ * 練習從mongodb 中取回資料
+ * 
+ * 
+ * @author Abola Lee
+ *
+ */
 public class YahooStockLoad {
 	
 	static Logger log = LoggerFactory.getLogger(YahooStockLoad.class);
-	
-	final static String mongodbServer = "128.199.204.20";
-	final static String mongodbDB = "mydb";
+
+	final static String mongodbServer = "128.199.204.20"; // your host name
+	final static String mongodbDB = "stock";
 
 	public static void main(String[] args) {
 		
@@ -46,10 +54,11 @@ public class YahooStockLoad {
 			DBObject group = new BasicDBObject( "$group", groupFields );
 			
 			// same as bottom sql
-			// ---
-			// select stock, day, time, strike, max(volume) 
-			// from TransDetail
-			// group by stock, day, time, strike
+			/*---
+			  select stock, day, time, strike, max(volume) 
+			  from TransDetail
+			  group by stock, day, time, strike
+			 */
 			
 			Iterator iter = coll.aggregate( group ).results().iterator();
 			int i=0;
