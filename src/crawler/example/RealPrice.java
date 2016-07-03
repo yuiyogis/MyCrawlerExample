@@ -27,18 +27,20 @@ public class RealPrice {
 				.getFromXml(uri);
 
 		// 印出整份 XML 資料
-		//System.out.println(jsoupDoc.toString());
+//		System.out.println(jsoupDoc.toString());
 
 		// print head
-		System.out.println("土地區段位置或建物區門牌,總價元,單價每平方公尺");
+		System.out.println("鄉鎮市區,都市土地使用分區,土地區段位置或建物區門牌,總價元,單價每平方公尺");
 
 		for( Element elem: jsoupDoc.select("買賣") ){
-			System.out.print("\""+elem.select("土地區段位置或建物區門牌").text()+"\"");
+			System.out.print("\""+elem.select("鄉鎮市區").text()+"\"");
+			System.out.print(",\""+elem.select("都市土地使用分區").text()+"\"");
+			System.out.print(",\""+elem.select("土地區段位置或建物區門牌").text()+"\"");
 			System.out.print(","+elem.select("總價元").text());
 			System.out.print(","+elem.select("單價每平方公尺").text());
 			System.out.println();
 		}
-//
+
 
 
 	}	
