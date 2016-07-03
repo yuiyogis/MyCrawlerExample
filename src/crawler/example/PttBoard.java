@@ -32,20 +32,33 @@ class PttBoard {
     public static void main(String[] argv){
 
     	// 取得前一頁的index
+//        data sample
+//        ---
+//        <div class="action-bar">
+//            <div class="btn-group btn-group-dir">
+//                <a class="btn selected" href="/bbs/Gossiping/index.html">看板</a>
+//                <a class="btn" href="/man/Gossiping/index.html">精華區</a>
+//            </div>
+//            <div class="btn-group btn-group-paging">
+//                <a class="btn wide" href="/bbs/Gossiping/index1.html">最舊</a>
+//                <a class="btn wide" href="/bbs/Gossiping/index14940.html">‹ 上頁</a>
+//                <a class="btn wide disabled">下頁 ›</a>
+//                <a class="btn wide" href="/bbs/Gossiping/index.html">最新</a>
+//            </div>
+//        </div>
         String prevPage =
             CrawlerPack.start()
                 .addCookie("over18","1")                // 八卦版進入需要設定cookie
-                .getFromHtml(pttMainPage)            // 遠端資料格式為 HTML
-                .select(".action-bar .pull-right > a")  // 取得右上角『前一頁』的內容
-                .get(1).attr("href")
+                .getFromHtml(pttMainPage)               // 遠端資料格式為 HTML
+                .select(".action-bar a:matchesOwn(上頁)")  // 取得右上角『上頁』的內容
+                .get(0).attr("href")
                 .replaceAll("/bbs/"+board+"/index([0-9]+).html", "$1");
-        
         
         
         // 目前最末頁 index 編號
         Integer lastPage = Integer.valueOf(prevPage);
 
-        List<String> lastPostsLink = new ArrayList<String>();
+        List<String> lastPostsLink = new ArrayList<>();
 
         while ( loadLastPosts > lastPostsLink.size() ){
             String currPage = String.format(pttIndexPage, lastPage--);

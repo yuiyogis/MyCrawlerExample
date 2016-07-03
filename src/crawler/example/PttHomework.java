@@ -8,7 +8,7 @@ import com.github.abola.crawler.CrawlerPack;
  * 
  * 找出所有文章中按推的id
  * 
- * @author I5-4670
+ * @author Abola Lee
  *
  */
 public class PttHomework {

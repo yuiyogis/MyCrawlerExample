@@ -3,7 +3,7 @@ package crawler.example;
 import org.jsoup.Jsoup;
 
 /**
- * Jsoup 碰到壓縮格式就投降了
+ * Jsoup 目前對於壓縮格式，還沒有很容易處理的方式
  * 
  * @author Abola Lee
  *

@@ -11,8 +11,8 @@ import com.github.abola.crawler.CrawlerPack;
  * 
  * 重點
  * 1. 利用Graph Api調整出需要的資料
- * 2. 取得一組Access Token (long term token)
- * 3. 試著用你會的方式，先行探索資料
+ * 2. 取得一組Access Token (試著使用 long term token)
+ * 3. 試著用『excel』或任何最簡易的方式，對資料進行探索
  * 
  * @author Abola Lee
  *
@@ -22,27 +22,42 @@ public class FBInsights {
 	public static void main(String[] args) {
 		
 		// 遠端資料路徑
+		// [query sample]
+		// search?fields=name,id,likes,talking_about_count&limit=1000&q=靠北&type=page
 		String uri = 
 				"https://graph.facebook.com/v2.5"
 				+ "/search?q=%E9%9D%A0%E5%8C%97&type=page&limit=1000&fields=name,id,likes,talking_about_count"
-				+ "&access_token=EAACEdEose0cBADZC1qXUZCsaNHh2XLQ1UZAzDyg1J6FGRAgJQc7kvWo9O1TWZAyRNZC0NmXdjigBrhiVemlhZCbcCqcehGOXD09M1YsD4EBNmWwaY8PpEQngniVz9bb2rShAnI5uW3ZB6Kk7RXqZC1X98XrPUZBOnZAC0EwbOQZCWEPZAgZDZD";
+				+ "&access_token=EAACEdEose0cBAMPIs6rJHHdWmJf6KU5KuhNgepGZCfS0h31JcnoQ2M9xBFZBxvRBtZBC6W19rxyPXdcZCShZATT2mGxWYRxsi7dM1XUIvFnL0X3yr31acys2Tlcbfk8QSpYUAoLjn9CuqhiqnMr8VW3xX8F3rGz8AOmKggLa4PwZDZD";
+
+
 
 		// Jsoup select 後回傳的是  Elements 物件
+//		[data sample]
+//		----
+//		{
+//			"data": [
+//			{
+//				"name": "靠北工程師",
+//					"id": "1632027893700148",
+//					"likes": 174587,
+//					"talking_about_count": 188119
+//			}
+//		}
 		Elements elems =
 				CrawlerPack.start()
 				.getFromJson(uri)
 				.select("data");
 		
-		String output = "id,按讚數,名稱,討論人數\n";
+		String output = "id,名稱,按讚數,討論人數\n";
 		
 		// 遂筆處理
 		for( Element data: elems ){
 			String id = data.select("id").text();
-			String likes = data.select("likes").text();
 			String name = data.select("name").text();
+			String likes = data.select("likes").text();
 			String talking_about_count = data.select("talking_about_count").text();
 			
-			output += id+","+likes+",\""+name+"\","+talking_about_count+"\n";
+			output += id+",\""+name+"\","+likes+","+talking_about_count+"\n";
 		}
 		
 		System.out.println( output );

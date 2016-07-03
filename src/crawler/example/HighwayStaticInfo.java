@@ -17,8 +17,7 @@ public class HighwayStaticInfo {
 
 		System.out.println(
 				CrawlerPack.start()
-			    .getFromXml(uri)
-			    
+			    	.getFromXml(uri)
 			    
 		);
 	}

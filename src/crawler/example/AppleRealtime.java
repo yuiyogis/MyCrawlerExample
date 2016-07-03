@@ -31,11 +31,21 @@ public class AppleRealtime {
 		String uri = "http://www.appledaily.com.tw/realtimenews/section/new/";
 
 		// 取出即時新聞列表
+//		data sample
+//		<li class="rtddt polit">
+//			<a href="/realtimenews/article/politics/20160703/899807/【更新】最新民調　74.6認同飛彈誤射是國軍螺絲鬆" target="_blank">
+//			<time>13:11</time>
+//			<h2>政治</h2>
+//			<h1><font color="#ff0000">【更新】最新民調　74.6%認同飛彈誤射...(4580)</font></h1>
+//			</a>
+//		</li>
+
 		Elements newsList = CrawlerPack.start()
 		    .getFromHtml(uri)
 		    .select(".rtddt");
 		
 		// Guava 專有物件，可為Map key排序
+		// 稍後用於排序還原比重後的新聞排序
 		ImmutableSortedMap.Builder<String, String> newsMap =
 				ImmutableSortedMap.reverseOrder();
 		
@@ -64,6 +74,7 @@ public class AppleRealtime {
 			Integer counter = 0;
 			String count = news.select("h1 > font").text().replaceAll("^(.*\\()([0-9]+)(\\).*)$", "$2") ;
 
+			// 空白或無點閱數資料處理
 			if ( count == null || count.trim() == ""  )
 				counter = 0;
 			else{
