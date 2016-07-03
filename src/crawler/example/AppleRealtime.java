@@ -61,10 +61,22 @@ public class AppleRealtime {
 			Integer diff = (int)(long)( new Date().getTime() - newTime.getTime() )/1000/60 +1 ;
 				
 			// 取出目前點閱數
+			Integer counter = 0;
 			String count = news.select("h1 > font").text().replaceAll("^(.*\\()([0-9]+)(\\).*)$", "$2") ;
-				
+
+			if ( count == null || count.trim() == ""  )
+				counter = 0;
+			else{
+				try {
+					counter = Integer.valueOf( count );
+				}catch(java.lang.NumberFormatException nfe){
+					counter = 0;
+				}
+			}
+
 			// 計算簡易效率值
-			Integer effect = Integer.valueOf(count) /diff;
+			Integer effect =  counter / diff;
+
 			
 			// 新聞標題
 			String title = news.select("h1 > font").text();
