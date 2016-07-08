@@ -53,6 +53,7 @@ public class PM25ElasticImport {
             Double  winddirec
                             = Doubles.tryParse( elem.getElementsByTag("WindDirec").text() );
 
+            // Elasticsearch data format
             String elasticJson = "{" +
                     "\"co\":" + co +
                     ",\"county\":\"" + county + "\"" +
