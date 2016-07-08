@@ -19,6 +19,8 @@ import com.github.abola.crawler.CrawlerPack;
  * 2. 如何從文章特性中提取資料
  * 3. 分頁資料練習
  * 4. 簡易將資料量化，做簡易的資料探索
+ *
+ * @author Abola Lee
  */
 class PttBoard {
 

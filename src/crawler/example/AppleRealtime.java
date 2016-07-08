@@ -30,8 +30,9 @@ public class AppleRealtime {
 		// 遠端資料路徑
 		String uri = "http://www.appledaily.com.tw/realtimenews/section/new/";
 
-		// 取出即時新聞列表
+//		取出即時新聞列表
 //		data sample
+//		----
 //		<li class="rtddt polit">
 //			<a href="/realtimenews/article/politics/20160703/899807/【更新】最新民調　74.6認同飛彈誤射是國軍螺絲鬆" target="_blank">
 //			<time>13:11</time>

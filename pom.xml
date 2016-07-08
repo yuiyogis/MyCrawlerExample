@@ -29,6 +29,10 @@
                 <mainClass>crawler.example.past.YahooStock</mainClass>
                 <id>yahooStock</id>
               </program>
+              <program>
+                  <mainClass>crawler.example.integration.PM25ElasticImport</mainClass>
+                  <id>pm25ElasticImport</id>
+              </program>
             </programs>
           </configuration>
         </plugin>           
@@ -56,6 +60,13 @@
 		<artifactId>guava</artifactId>
 		<version>19.0</version>
 	</dependency>
+      <!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
+      <dependency>
+          <groupId>com.mashape.unirest</groupId>
+          <artifactId>unirest-java</artifactId>
+          <version>1.4.9</version>
+      </dependency>
+
 
   </dependencies> 
 </project>

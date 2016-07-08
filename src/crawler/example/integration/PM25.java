@@ -1,10 +1,12 @@
-package crawler.example;
+package crawler.example.integration;
 
 import com.github.abola.crawler.CrawlerPack;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 /**
+ * 整合練習：PM2.5 資料取得
+ *
  * @author Abola Lee
  */
 public class PM25 {
@@ -40,7 +42,8 @@ public class PM25 {
 
 
         for(Element elem: jsoupDoc.select("Data")){
-            System.out.println( elem.getElementsByTag("pm2.5").text() );
+            System.out.println(elem.toString());
+//            System.out.println( elem.getElementsByTag("pm2.5").text() );
 
         }
     }

@@ -1,0 +1,64 @@
+  {
+    "mappings" : {
+      "data" : {
+        "properties" : {
+          "co" : {
+            "type" : "double"
+          },
+          "county" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "fpmi" : {
+            "type" : "long"
+          },
+          "majorpollutant" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "no" : {
+            "type" : "double"
+          },
+          "no2" : {
+            "type" : "long"
+          },
+          "nox" : {
+            "type" : "double"
+          },
+          "o3" : {
+            "type" : "long"
+          },
+          "pm10" : {
+            "type" : "long"
+          },
+          "pm25" : {
+            "type" : "long"
+          },
+          "psi" : {
+            "type" : "long"
+          },
+          "publishtime" : {
+            "type" : "date",
+            "format" : "strict_date_optional_time||epoch_millis"
+          },
+          "sitename" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "so2" : {
+            "type" : "long"
+          },
+          "status" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "winddirec" : {
+            "type" : "long"
+          },
+          "windspeed" : {
+            "type" : "double"
+          }
+        }
+      }
+    }
+  }
