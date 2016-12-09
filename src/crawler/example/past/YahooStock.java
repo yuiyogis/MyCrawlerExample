@@ -1,21 +1,18 @@
 package crawler.example.past;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.abola.crawler.CrawlerPack;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 整合練習：Yahoo Stock 個股成交明細
@@ -33,8 +30,8 @@ import com.mongodb.MongoClient;
  *
  */
 public class YahooStock {
-
-	static Logger log = LoggerFactory.getLogger(YahooStock.class);
+	
+	
 	final static String mongodbServer = "128.199.204.20"; // your host name
 	final static String mongodbDB = "stock";
 	
@@ -50,7 +47,7 @@ public class YahooStock {
 			stockNumber = args[0];
 		}else{
 			// 沒輸入參數
-			log.error("未輸入股號");
+			System.out.println("未輸入股號");
 			
 			// 技巧：NullPointerException 才能正確中止 Jenkins 的 job
 			String forkException=null; 
@@ -70,7 +67,7 @@ public class YahooStock {
 		// 遠端資料路徑
 		String uri = String.format(uri_format, stockNumber);
 		
-		log.debug("Call remote uri: {}", uri);
+		System.out.println("Call remote uri:" + uri);
 		
 		// 取得交易明細資料		
 		Elements transDetail = 
@@ -149,7 +146,7 @@ public class YahooStock {
 			db.getCollection("TransDetail").insert(parsedTransDetail);
 			
 		} catch (Exception e) {
-			log.warn(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 }

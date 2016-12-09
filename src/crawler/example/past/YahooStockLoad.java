@@ -2,9 +2,6 @@ package crawler.example.past;
 
 import java.util.Iterator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -21,7 +18,7 @@ import com.mongodb.MongoClient;
  */
 public class YahooStockLoad {
 	
-	static Logger log = LoggerFactory.getLogger(YahooStockLoad.class);
+	//static Logger log = LoggerFactory.getLogger(YahooStockLoad.class);
 
 	final static String mongodbServer = "128.199.204.20"; // your host name
 	final static String mongodbDB = "stock";
@@ -37,10 +34,10 @@ public class YahooStockLoad {
 			DBCollection coll = db.getCollection("TransDetail");
 			
 			// 總筆數
-			log.debug("total row of detail: {}", coll.getCount());
+			//log.debug("total row of detail: {}", coll.getCount());
 			
 			// 不重覆筆數 of time
-			log.debug("distinct row of detail: {}", coll.distinct("time").size());
+			//log.debug("distinct row of detail: {}", coll.distinct("time").size());
 			
 			DBObject fields = new BasicDBObject();
 			fields.put( "stock", "$stock" );
@@ -63,10 +60,10 @@ public class YahooStockLoad {
 			Iterator iter = coll.aggregate( group ).results().iterator();
 			int i=0;
 			while(iter.hasNext()){
-				log.debug( iter.next().toString() );
+				//log.debug( iter.next().toString() );
 				++i;
 			}
-			log.debug("group row of detail: {}",i);
+			//log.debug("group row of detail: {}",i);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
