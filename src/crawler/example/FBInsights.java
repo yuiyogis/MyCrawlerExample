@@ -27,7 +27,7 @@ public class FBInsights {
 		String uri = 
 				"https://graph.facebook.com/v2.5"
 				+ "/search?q=%E9%9D%A0%E5%8C%97&type=page&limit=1000&fields=name,id,likes,talking_about_count"
-				+ "&access_token=EAACEdEose0cBAMPIs6rJHHdWmJf6KU5KuhNgepGZCfS0h31JcnoQ2M9xBFZBxvRBtZBC6W19rxyPXdcZCShZATT2mGxWYRxsi7dM1XUIvFnL0X3yr31acys2Tlcbfk8QSpYUAoLjn9CuqhiqnMr8VW3xX8F3rGz8AOmKggLa4PwZDZD";
+				+ "&access_token=EAACEdEose0cBAMzLyMlMxZAY73J1TBiZAHJhrF8du8fLhMmGYrUA3W9ezJDQk9oZAa07o4F2drZAL2k1cCtgdpl5LZClZCo6733A3xddNbjSAoTxEZBWY4rKnzLWTU3I0KMgT0qsw6eIRfdzg9RZCIkuTZCtGZCyzct657fywQpsFCNAZDZD";
 
 
 

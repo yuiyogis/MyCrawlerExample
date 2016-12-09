@@ -1,6 +1,7 @@
 package crawler.example;
 
 import com.github.abola.crawler.CrawlerPack;
+import org.apache.commons.logging.impl.SimpleLog;
 
 /**
  * YouBike 資料抓取
@@ -11,6 +12,9 @@ import com.github.abola.crawler.CrawlerPack;
 public class YoubikeData {
 
 	public static void main(String[] args) {
+
+		// turn off logging
+		CrawlerPack.setLoggerLevel(SimpleLog.LOG_LEVEL_OFF);
 
 	    // 簡址無法成功爬取資料
         //String uri = "http://data.taipei/youbike";
