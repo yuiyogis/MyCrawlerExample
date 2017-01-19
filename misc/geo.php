@@ -1,5 +1,9 @@
+<?php
 /**
- * 取得GeoJson 的矩形邊界
+ * 取得GeoJson 的矩形邊界  
+ * 
+ * @param $json GeoJSON 資料
+ * @return [左上lat, 左上 lon, 右下lat, 右下lon]
  *
  *     *       *****
  *    * *      *   *
@@ -26,8 +30,8 @@ function geojson_boundary($json){
 }
 
 /**
- * 設定座標位移角度($brng) 及距離($dist)
- *
+ * 設定座標位移角度($brng) 及距離($dist) 
+ * 
  *         0
  *         |
  *  270 ---+--- 90
@@ -103,7 +107,12 @@ function loadGeometry($features){
   return $results;
 }
 
-
+/**
+ * 判斷兩點是否存在 $x,$y 範圍內
+ *
+ * @param $x X軸座標陣列
+ * @param $y Y軸座標陣列
+ */
 function isPointInsidePolygon ($x, $y, $pointX, $pointY){
   $isInside = false;
   $nPoints = count($x);
