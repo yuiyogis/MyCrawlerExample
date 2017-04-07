@@ -14,11 +14,8 @@ import java.util.List;
 /**
  * 範例: 使用爬蟲包取得八卦版最後50篇文章的網址
  *
- * 重點
- * 1. cookie 如何設定
- * 2. 如何從文章特性中提取資料
- * 3. 分頁資料練習
- * 4. 簡易將資料量化，做簡易的資料探索
+ *  Google Chrome 的開發人員工具
+ *  在指定的區塊按右鍵 > Copy > Copy Selector
  *
  * @author Abola Lee
  */
@@ -33,7 +30,7 @@ class CSSSelector {
         CrawlerPack.setLoggerLevel(SimpleLog.LOG_LEVEL_OFF);
 
         // 遠端資料路徑
-        String uri = "https://www.ptt.cc/bbs/joke/M.1481363308.A.CF2.html";
+        String uri = "https://tw.yahoo.com";
 
         System.out.println(
                 CrawlerPack.start()
@@ -43,12 +40,12 @@ class CSSSelector {
                         //.setRemoteEncoding("big5")// 設定遠端資料文件編碼
 
                         // 選擇資料格式 (三選一)
-                        .getFromJson(uri)
-                        //.getFromHtml(uri)
+                        //.getFromJson(uri).toString()
+                        .getFromHtml(uri)
                         //.getFromXml(uri)
 
                         // 這兒開始是 Jsoup Document 物件操作
-                        .select(".css .selector ")
+                        .select(" li:nth-child(2) > div > span > a > span")
 
         );
     }
