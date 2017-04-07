@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "資策會-爬蟲課程",
-		"_postman_id": "a8acceee-377d-36a9-14c2-111b642ae7cc",
+		"_postman_id": "bf75a448-7956-8195-453e-02ad8aa0eace",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -17,10 +17,7 @@
 						"url": "http://www.104.com.tw/i/apis/jobsearch.cfm?kws=java&kwop=3&fmt=7",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -31,10 +28,7 @@
 						"url": "http://www.104.com.tw/i/apis/jobsearch.cfm?kws=python&kwop=3&fmt=7",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -45,10 +39,7 @@
 						"url": "http://www.104.com.tw/i/apis/jobsearch.cfm?kws=php&kwop=3&fmt=7",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -59,10 +50,7 @@
 						"url": "http://www.104.com.tw/i/apis/jobsearch.cfm?kws=elasticsearch&kwop=3&fmt=1",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -73,10 +61,7 @@
 						"url": "http://www.104.com.tw/i/apis/jobsearch.cfm?order=2&fmt=4&cols=JOB,NAME&slmin=50000&sltp=S&pgsz=50&kws=%E7%A8%8B%E5%BC%8F",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -93,10 +78,88 @@
 						"url": "http://www.geologycloud.tw/data/zh-tw/liquefaction?area=%E8%87%BA%E5%8C%97&classify=%E9%AB%98%E6%BD%9B%E5%8B%A2&all=true",
 						"method": "GET",
 						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Google API",
+			"description": "",
+			"item": [
+				{
+					"name": "Maps Geolocation",
+					"request": {
+						"url": "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBKaRf2VL8q5gh9MXXBDi409aapPIjaAMU",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
 						"body": {
-							"mode": "formdata",
-							"formdata": []
+							"mode": "raw",
+							"raw": "{\r\n  \"considerIp\": \"false\",\r\n  \"wifiAccessPoints\": [\r\n    {\r\n        \"macAddress\": \"bc:4d:fb:8b:d4:98\"\r\n    },\r\n    {\r\n        \"macAddress\": \"00:d7:8f:33:d7:70\"\r\n    },\r\n    {\r\n        \"macAddress\": \"00:17:13:1c:f7:7c\"\r\n    },\r\n    {\r\n        \"macAddress\": \"00:17:13:1b:cc:04\"\r\n    },\r\n    {\r\n        \"macAddress\": \"f8:35:dd:32:fe:9a\"\r\n    }\r\n  ]\r\n}\r\n"
 						},
+						"description": "依 wifi bssid mac list 定位"
+					},
+					"response": []
+				},
+				{
+					"name": "Maps Directions - 路線規劃",
+					"request": {
+						"url": "https://maps.googleapis.com/maps/api/directions/json?origin=25.050492,121.593230&destination=25.033571,121.543420&key=AIzaSyBKaRf2VL8q5gh9MXXBDi409aapPIjaAMU",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": " 路線規劃 昆陽 > 大安"
+					},
+					"response": []
+				},
+				{
+					"name": "Maps Directions - 路線規劃-transit",
+					"request": {
+						"url": "https://maps.googleapis.com/maps/api/directions/json?mode=transit&origin=25.050492,121.593230&destination=25.033571,121.543420&key=AIzaSyBKaRf2VL8q5gh9MXXBDi409aapPIjaAMU",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "路線規劃 昆陽 > 大安 \n使用大眾交通工具"
+					},
+					"response": []
+				},
+				{
+					"name": "Maps Places - 地點搜尋 ",
+					"request": {
+						"url": "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=25.033571,121.543420&radius=500&type=cafe&key=AIzaSyBKaRf2VL8q5gh9MXXBDi409aapPIjaAMU\n",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "指定地點(location)\n半徑範圍內(radius)\n的結果"
+					},
+					"response": []
+				},
+				{
+					"name": "Maps Places - 地點詳細資料",
+					"request": {
+						"url": "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJJ8Qp2CmqQjQR3bkrZhaTtOs&key=AIzaSyBKaRf2VL8q5gh9MXXBDi409aapPIjaAMU",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "查詢指定地點(placeid)的詳細資訊"
+					},
+					"response": []
+				},
+				{
+					"name": "Maps Geocoding - 地址轉座標",
+					"request": {
+						"url": "https://maps.googleapis.com/maps/api/geocode/json?address=台北市復興南路一段390號&key=AIzaSyBKaRf2VL8q5gh9MXXBDi409aapPIjaAMU",
+						"method": "GET",
+						"header": [],
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -113,10 +176,7 @@
 						"url": "http://opendata2.epa.gov.tw/AQX.json",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": "政府資料開放平臺\nhttp://data.gov.tw/node/6074"
 					},
 					"response": []
@@ -127,10 +187,7 @@
 						"url": "https://tpairbox.blob.core.windows.net/blobfs/AirBoxData.gz",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": "http://data.taipei/opendata/datalist/datasetMeta?oid=4ba06157-3854-4111-9383-3b8a188c962a\r\n\r\n空氣盒子即時量測資料\r\n\r\n分類及編號：生活安全及品質 \r\n資料集描述： 即時偵測資料:一小時內各地空氣盒子所蒐集的資料。 歷史偵測資料:七天內的歷史資料。 設備資料:空氣盒子設備的相關資料。 (檔案為gz格式壓縮，原始檔案為json格式) 8/10更新格式及資料來源，請取用v2版本，舊檔案將於今年底停止更新 \r\n主要欄位說明： (1)偵測資料: time：資料產生時間 device_id：AirBox ID s_0：Message sequence number s_1：Battery power(0 ~ 100) s_2：Battery or Plug(0: Battery 1: Plug) s_3：Moving speed(Should be 0) s_d0：PM2.5 s_t0：Temperature s_h0：Humidity (2)設備資料： device_id：AirBox ID vendor：Vendor number ver_format：Message format version fmt_opt：A fixed value app：App name ver_app：AirBox firmware version device：AirBox Name gps_lat：Latitude gps_lon：Longitude gps_fix：A fixed value(Must be 1) gps_num：A number(Greater than 4) gps_alt：Altitude(註:gps_fix,gps_num,gps_alt這三個欄位是為了與LASS相容而設置，並無實質用途) \r\n資料集類型： 原始資料 "
 					},
 					"response": []
@@ -147,10 +204,7 @@
 						"url": "http://www.appledaily.com.tw/rss/newcreate/kind/rnews/type/new",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -161,10 +215,7 @@
 						"url": "http://feed.pixnet.net/blog/posts/rss/yao55",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -175,10 +226,7 @@
 						"url": "https://tw.movies.yahoo.com/rss/tpeboxoffice",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -189,10 +237,7 @@
 						"url": "http://www.mobile01.com/rss/hottopics.xml",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -203,10 +248,7 @@
 						"url": "https://case.104.com.tw/rss/newcase_cat1.xml",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -223,10 +265,7 @@
 						"url": "https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.gz",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": "https://taipeicity.github.io/traffic_realtime/\n\nReal Path\nhttps://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.gz\n\nSimple Path\nhttp://data.taipei/youbike\n\n1. 使用瀏覽器的『開發人員工具』>『Network』找出轉址後的真實路徑\n2. "
 					},
 					"response": []
@@ -243,10 +282,7 @@
 						"url": "http://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City/Taipei/307?%24top=300&%24format=JSON",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": "http://ptx.transportdata.tw/MOTC/Swagger/#!/CityBusApi/CityBusApi_EstimatedTimeOfArrival_0\n\nhttp://pda.5284.com.tw/MQS/businfo2.jsp?routename=307\n"
 					},
 					"response": []
@@ -263,10 +299,7 @@
 						"url": "https://data.wra.gov.tw/Service/OpenData.aspx?id=416458BC-185A-469F-9ED5-739E1092960F&format=xml",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
@@ -277,10 +310,7 @@
 						"url": "http://plvr.land.moi.gov.tw//Download?type=zip&fileName=lvr_landxml.zip",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": "http://plvr.land.moi.gov.tw/DownloadOpenData"
 					},
 					"response": []
@@ -297,10 +327,7 @@
 						"url": "http://www.mtac.gov.tw/pages/283/MTAC005.csv",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": "WTF?"
 					},
 					"response": []
@@ -311,10 +338,7 @@
 						"url": "http://www.fia.gov.tw/public/Attachment/671315332771.csv",
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
+						"body": {},
 						"description": ""
 					},
 					"response": []
