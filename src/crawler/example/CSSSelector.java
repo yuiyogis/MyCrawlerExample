@@ -30,7 +30,8 @@ class CSSSelector {
         CrawlerPack.setLoggerLevel(SimpleLog.LOG_LEVEL_OFF);
 
         // 遠端資料路徑
-        String uri = "https://tw.yahoo.com";
+        String uri = "http://data.gov.tw/wise_search?nodetype=metadataset&kw=%E5%85%AC%E8%BB%8A%E5%8B%95%E6%85%8B";
+        //String uri = "https://www.ptt.cc/index.html";
 
         System.out.println(
                 CrawlerPack.start()
@@ -45,7 +46,10 @@ class CSSSelector {
                         //.getFromXml(uri)
 
                         // 這兒開始是 Jsoup Document 物件操作
-                        .select(" li:nth-child(2) > div > span > a > span")
+                        .select("#main-menu > div.menu-navigation-container > ul > li.first.leaf.active-trail > a")
+                        //.select("#main-menu > div.menu-navigation-container > ul > li.first.leaf.active-trail > a")
+                        //.select(" #prodlist > h2")
+
 
         );
     }
